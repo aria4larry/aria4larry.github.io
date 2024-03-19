@@ -1,3 +1,4 @@
-theme: jekyll-theme-minimal
 title: Charlie's homepage
 description: Bookmark this to keep an eye on my project/blog updates!
+theme: minima
+author:Charlie Lee
