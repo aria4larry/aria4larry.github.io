@@ -1,4 +1,5 @@
 ---
 title: Welcome to my blog
 ---
-> I'll write blogs about RAG and GAI in this repo
+> I'll write about anything useful in this repo.
+includeing WiKis, blogs, instresting finding etc.
