@@ -31,42 +31,42 @@ superset run -p 8088 --with-threads --reload --debugger # use develop server to 
 Normally we want superset connect to a prodction database like MySQL or PostgresQL.
 We can use a ```superset_config.py``` to config it.
 
-* superset_config.py
-    ```python
-    # superset_config.py
-    from flask_limiter import Limiter
-    from flask_limiter.util import get_remote_address
-    import redis
-    import logging
-    
-    # 配置 Redis 连接
-    REDIS_HOST = 'localhost'
-    REDIS_PORT = 6379
-    REDIS_DB = 0
-    REDIS_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}"
-    
-    # 初始化 Flask-Limiter 并使用 Redis 作为存储后端
-    limiter = Limiter(
-        key_func=get_remote_address,
-        storage_uri=REDIS_URL
-    )
-    
-    # 将 limiter 添加到 Superset 的扩展中
-    def init_app(app):
-        limiter.init_app(app)
-    
-    SECRET_KEY = "f8LkvdRW/p02l5KWn*****************lN5iA53Ge8KSwe9M2"
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://username:password@db_host:5432/superset'
-    
-    # 确保 init_app 被调用
-    #from superset.app import create_app
-    #app = create_app()
-    #init_app(app)
-    
-    # 添加日志输出
-    logging.basicConfig(level=logging.INFO)
-    logging.info("Loaded custom superset_config.py")
-    ```
+superset_config.py
+```python
+# superset_config.py
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+import redis
+import logging
+
+# 配置 Redis 连接
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0
+REDIS_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}"
+
+# 初始化 Flask-Limiter 并使用 Redis 作为存储后端
+limiter = Limiter(
+    key_func=get_remote_address,
+    storage_uri=REDIS_URL
+)
+
+# 将 limiter 添加到 Superset 的扩展中
+def init_app(app):
+    limiter.init_app(app)
+
+SECRET_KEY = "f8LkvdRW/p02l5KWn*****************lN5iA53Ge8KSwe9M2"
+SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://username:password@db_host:5432/superset'
+
+# 确保 init_app 被调用
+#from superset.app import create_app
+#app = create_app()
+#init_app(app)
+
+# 添加日志输出
+logging.basicConfig(level=logging.INFO)
+logging.info("Loaded custom superset_config.py")
+```
 
 start command:
 ```sh
